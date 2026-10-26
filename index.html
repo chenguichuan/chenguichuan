@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Guichuan's personal homepage · AI Engineer · Open Source Enthusiast" />
+<title>Guichuan · Personal Homepage</title>
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<style>
+  /* ============ Base variables ============ */
+  :root {
+    --bg: #0d1117;
+    --bg-soft: #161b22;
+    --border: #21262d;
+    --border-strong: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-2: #a371f7;
+    --radius: 14px;
+    --max: 1080px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+                 "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  /* ============ Top navigation ============ */
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 clamp(16px, 4vw, 40px);
+    background: rgba(13, 17, 23, .72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-size: 20px; font-weight: 700; letter-spacing: .5px; }
+  .logo span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: clamp(12px, 2.5vw, 28px);
+    list-style: none;
+    font-size: 14px;
+  }
+  .nav-links a {
+    color: var(--muted);
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width .25s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ============ Hero ============ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 90px;
+    text-align: center;
+    overflow: hidden;
+  }
+  /* Grid background */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(48, 54, 61, .38) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48, 54, 61, .38) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 42%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 42%, #000 25%, transparent 75%);
+  }
+  /* Mouse-following glow */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 40%),
+                rgba(88, 166, 255, .10), transparent 60%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; }
+
+  .avatar {
+    width: 132px;
+    height: 132px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+    background: linear-gradient(135deg, #1f6feb, #a371f7);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.08),
+                0 24px 60px -18px rgba(88, 166, 255, .65);
+    position: relative;
+  }
+  .avatar::after {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(88, 166, 255, .35);
+    animation: spin 22s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hero-hi {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 8vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+    background: linear-gradient(180deg, #ffffff 25%, #9fb6d1 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-role {
+    font-size: clamp(16px, 2.4vw, 20px);
+    color: var(--muted);
+    min-height: 1.8em;
+    margin-bottom: 20px;
+  }
+  .hero-role b { color: var(--accent); font-weight: 600; }
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 3px;
+    vertical-align: -2px;
+    background: var(--accent);
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-desc {
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0 auto 34px;
+    font-size: 16px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 34px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-soft);
+    font-size: 15px;
+    font-weight: 500;
+    transition: transform .2s, background .2s, border-color .2s, box-shadow .2s;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    background: #1c2128;
+    border-color: #4a5568;
+  }
+  .btn.primary {
+    background: linear-gradient(135deg, #238636, #2ea043);
+    border-color: #2ea043;
+    color: #fff;
+    box-shadow: 0 10px 28px -10px rgba(46, 160, 67, .75);
+  }
+  .btn.primary:hover { filter: brightness(1.1); }
+
+  .socials {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+  }
+  .socials a {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    transition: all .2s;
+  }
+  .socials a:hover {
+    color: var(--accent);
+    border-color: rgba(88, 166, 255, .5);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px -10px rgba(88, 166, 255, .6);
+  }
+
+  /* ============ Shared sections ============ */
+  .section {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(64px, 10vw, 100px) clamp(20px, 5vw, 40px);
+  }
+  .section-head { margin-bottom: 44px; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .section-head h2 {
+    font-size: clamp(26px, 4vw, 36px);
+    letter-spacing: -.8px;
+    line-height: 1.25;
+  }
+  .section-head p {
+    color: var(--muted);
+    margin-top: 10px;
+    max-width: 60ch;
+  }
+
+  /* ============ About ============ */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(24px, 5vw, 52px);
+    align-items: start;
+  }
+  .about-text p { color: var(--muted); margin-bottom: 16px; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .stat {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 12px;
+    text-align: center;
+    transition: border-color .25s, transform .25s;
+  }
+  .stat:hover { border-color: rgba(88, 166, 255, .45); transform: translateY(-3px); }
+  .stat strong {
+    display: block;
+    font-size: 26px;
+    line-height: 1.3;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .stat span { font-size: 13px; color: var(--muted); }
+
+  /* ============ Skills ============ */
+  .skill-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .skill-group {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: border-color .25s, transform .25s;
+  }
+  .skill-group:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+  .skill-group h3 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 9px; }
+  .tag {
+    font-size: 13.5px;
+    padding: 5px 13px;
+    border-radius: 999px;
+    color: var(--text);
+    background: rgba(110, 118, 129, .14);
+    border: 1px solid var(--border-strong);
+  }
+
+  /* ============ Contact ============ */
+  .contact { text-align: center; }
+  .contact .section-head { margin-bottom: 26px; }
+  .contact .section-head p { margin-left: auto; margin-right: auto; }
+
+  /* ============ Footer ============ */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 34px 24px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .footer a { color: var(--accent); }
+  .footer a:hover { text-decoration: underline; }
+
+  /* ============ Scroll reveal animation ============ */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s cubic-bezier(.22, 1, .36, 1),
+                transform .7s cubic-bezier(.22, 1, .36, 1);
+  }
+  .js .reveal.visible { opacity: 1; transform: none; }
+
+  /* ============ Responsive layout ============ */
+  @media (max-width: 860px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .nav { height: 58px; }
+    .nav-links { font-size: 13px; gap: 12px; }
+    .logo { font-size: 18px; }
+    .hero { padding-top: 100px; }
+    .avatar { width: 108px; height: 108px; font-size: 34px; }
+    .btn { padding: 10px 18px; font-size: 14px; }
+  }
+
+  /* ============ Accessibility: reduced motion ============ */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+    .js .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= Navigation ================= -->
+  <nav class="nav">
+    <a href="#" class="logo">GC<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================= Hero ================= -->
+  <header class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <!-- To use a profile photo, replace this div with:
+           <img src="./avatar.png" alt="Profile photo" class="avatar" style="object-fit:cover"> -->
+      <div class="avatar">GC</div>
+
+      <p class="hero-hi">Hi, I'm</p>
+      <h1>Guichuan</h1>
+      <p class="hero-role">I'm an <b><span class="typewriter"></span></b><span class="cursor"></span></p>
+      <p class="hero-desc">
+        I enjoy turning complex problems into simple code. I love open source, experimenting, and bringing ideas to life.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub Profile</a>
+      </div>
+
+      <div class="socials">
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+          </svg>
+        </a>
+        <a href="mailto:2579118475@qq.com" aria-label="Email" title="Email">
+          <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88l6.5-3.81Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= About ================= -->
+  <section id="about" class="section reveal">
+    <div class="section-head">
+      <span class="eyebrow">About</span>
+      <h2>About Me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Hello, I'm Guichuan, an AI engineer. I'm currently studying computer vision. Feel free to connect ☕
+        </p>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>5 Years</strong><span>Development Experience</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Skills ================= -->
+  <section id="skills" class="section reveal">
+    <div class="section-head">
+      <span class="eyebrow">Skills</span>
+      <h2>Tech Stack</h2>
+      <p>Technologies I use and continue to learn.</p>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+          <span class="tag">Java</span>
+          <span class="tag">C#</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Frameworks / Libraries</h3>
+        <div class="tags">
+          <span class="tag">Vue 3</span>
+          <span class="tag">React</span>
+          <span class="tag">Vite</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Tools / Other</h3>
+        <div class="tags">
+          <span class="tag">Git</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Contact ================= -->
+  <section id="contact" class="section reveal contact">
+    <div class="section-head">
+      <span class="eyebrow">Contact</span>
+      <h2>Get in Touch</h2>
+      <p>I'm open to discussing technology, open-source collaborations, or anything interesting you're working on.</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn primary" href="mailto:2579118475@qq.com">Send Email</a>
+      <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <!-- ================= Footer ================= -->
+  <footer class="footer">
+    <p>© <span id="year">2025</span> Guichuan · Built with HTML &amp; CSS · Hosted on
+      <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>
+    </p>
+  </footer>
+
+<script>
+  /* ---------- 1. Typewriter effect ---------- */
+  (function () {
+    var words = ['AI Engineer', 'Open Source Enthusiast', 'Independent Developer'];
+    var el = document.querySelector('.typewriter');
+    if (!el) return;
+
+    var wi = 0, ci = 0, deleting = false;
+
+    function tick() {
+      var word = words[wi];
+      ci += deleting ? -1 : 1;
+      el.textContent = word.slice(0, ci);
+
+      var delay = deleting ? 55 : 120;
+
+      if (!deleting && ci === word.length) {
+        delay = 1500;
+        deleting = true;
+      } else if (deleting && ci === 0) {
+        deleting = false;
+        wi = (wi + 1) % words.length;
+        delay = 260;
+      }
+      setTimeout(tick, delay);
+    }
+    tick();
+  })();
+
+  /* ---------- 2. Scroll reveal animation ---------- */
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* ---------- 3. Hero mouse-following glow ---------- */
+  (function () {
+    var hero = document.querySelector('.hero');
+    if (!hero || window.matchMedia('(pointer: coarse)').matches) return;
+
+    var ticking = false;
+    document.addEventListener('mousemove', function (e) {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        hero.style.setProperty('--mx', e.clientX + 'px');
+        hero.style.setProperty('--my', e.clientY + 'px');
+        ticking = false;
+      });
+    });
+  })();
+
+  /* ---------- 4. Footer year ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
